@@ -1,0 +1,56 @@
+package com.example.giuaki.activity;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+
+import com.example.giuaki.R;
+
+public class MenuActivity extends AppCompatActivity {
+    CardView cvWorker, cvTimekeeping, cvDetail, cvProduct;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_menu);
+    }
+    private void addControls(){
+        cvWorker = findViewById(R.id.cvWorker);
+        cvTimekeeping = findViewById(R.id.cvTimekeeping);
+        cvDetail = findViewById(R.id.cvDetail);
+        cvProduct = findViewById(R.id.cvProduct);
+    }
+    private void addEvents() {
+//        cvWorker.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity2.this, ManageWorker.class);
+//                startActivity(intent);
+//            }
+//        });
+        cvTimekeeping.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuActivity.this, ChamCongActivity.class);
+                startActivity(intent);
+            }
+        });
+//        cvDetail.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity2.this, ManageDetail.class);
+//                startActivity(intent);
+//            }
+//        });
+//        cvProduct.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity2.this, ManageProduct.class);
+//                startActivity(intent);
+//            }
+//        });
+    }
+}

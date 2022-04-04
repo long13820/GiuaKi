@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.giuaki.activity.TimekeepingActivity;
+import com.example.giuaki.activity.MenuActivity;
 import com.example.giuaki.database.DBHelper;
 
 public class LoginActivity extends AppCompatActivity {

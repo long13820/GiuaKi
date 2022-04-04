@@ -10,7 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GiuaKi">
         <activity
-            android:name=".MenuActivity"
+            android:name=".activity.ChamCongActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MenuActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
