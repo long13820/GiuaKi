@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:background="@drawable/dialog"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_margin="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialogtop"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="Thêm công nhân"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/insert_id_cn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/border_edittext"
+        android:hint="Nhập mã công nhân"
+        android:padding="12sp"
+        android:textColor="#000000" />
+
+    <EditText
+        android:id="@+id/insert_ho_cn"
+        android:layout_width="match_parent"
+        android:background="@drawable/border_edittext"
+        android:layout_height="wrap_content"
+        android:padding="12sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:hint="Nhập họ" />
+    <EditText
+        android:id="@+id/insert_ten_cn"
+        android:layout_width="match_parent"
+        android:background="@drawable/border_edittext"
+        android:layout_height="wrap_content"
+        android:padding="12sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:hint="Nhập tên" />
+
+    <EditText
+        android:id="@+id/insert_phan_xuong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/border_edittext"
+        android:hint="Nhập phân xưởng"
+        android:padding="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_them_cong_nhan"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_dongy_dangki"
+            android:text="Thêm"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:backgroundTint="#00CCCC" />
+
+        <Button
+            android:id="@+id/btn_thoat"
+            android:layout_marginRight="10dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_dongy_dangki"
+            android:text="Hủy"
+            android:textSize="14sp"
+            app:backgroundTint="@android:color/darker_gray" />
+    </LinearLayout>
+
+
+</LinearLayout>
