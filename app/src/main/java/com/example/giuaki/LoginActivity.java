@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.giuaki.activity.MenuActivity;
 import com.example.giuaki.database.DBHelper;
+import com.example.giuaki.model.Utils;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -127,6 +128,8 @@ public class LoginActivity extends AppCompatActivity {
                public void onClick(View view) {
                    if(editUser.getText().length()!= 0 && editPass.getText().length()!= 0){
                        if(DB.checkUsernamePassword(editUser.getText().toString(),editPass.getText().toString()) == true){
+                           Utils.username = editUser.getText().toString().trim();
+                           Utils.pass = editPass.getText().toString().trim();
                             Toast.makeText(LoginActivity.this,"Đăng nhập thành công",Toast.LENGTH_SHORT).show();
                             intent = new Intent(LoginActivity.this, MenuActivity.class);
                             startActivity(intent);

@@ -2,7 +2,6 @@ package com.example.giuaki.model;
 
 public class Users {
     private int id;
-
     private String username,password, phonenumber, email;
 
     public Users(int id, String username, String password, String phonenumber, String email) {
