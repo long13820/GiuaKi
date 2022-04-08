@@ -16,6 +16,9 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        addControls();
+        addEvents();
     }
     private void addControls(){
         cvWorker = findViewById(R.id.cvWorker);
