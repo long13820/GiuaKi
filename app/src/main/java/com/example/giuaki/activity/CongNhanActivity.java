@@ -98,7 +98,7 @@ public class CongNhanActivity extends AppCompatActivity {
     }
     public void updateCongNhan(CongNhan congNhan){
         Dialog dialog = new Dialog(this);
-        dialog.setTitle("Thêm công nhân");
+        dialog.setTitle("Update công nhân");
         dialog.setCancelable(false);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.update_cong_nhan);
@@ -112,6 +112,7 @@ public class CongNhanActivity extends AppCompatActivity {
         EditText phanXuong = (EditText)dialog.findViewById(R.id.update_phan_xuong);
 
         Button btnThem = (Button)dialog.findViewById(R.id.btn_update_cong_nhan);
+        Button btnXoa = (Button)dialog.findViewById(R.id.btn_xoa_cong_nhan);
         Button btnback = (Button)dialog.findViewById(R.id.btn_update_thoat);
 
         //set value
@@ -144,7 +145,17 @@ public class CongNhanActivity extends AppCompatActivity {
                     dialog.cancel();
                 }
             }else{
-                Toast.makeText(this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Update thất bại", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btnXoa.setOnClickListener(view -> {
+            if(dbHelper.deleteCongNhan(maCN.getText().toString().trim())){
+                congNhans = dbHelper.getAllEmployees();
+                adapter.setData(congNhans);
+                dialog.cancel();
+                Toast.makeText(this, "Xóa thành công", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(this, "Xóa Thất bại", Toast.LENGTH_SHORT).show();
             }
         });
         btnback.setOnClickListener(view -> {

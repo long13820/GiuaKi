@@ -56,6 +56,7 @@
         <entry key="app/src/main/res/drawable/ic_add_img.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/ic_back_img.xml" value="0.1225" />
         <entry key="app/src/main/res/layout/activity_cham_cong.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_change_pass.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_con_nhan.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/layout/activity_cong_nhan.xml" value="0.22" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
@@ -64,6 +65,8 @@
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/layout/activity_timekeeping.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/layout/add_cong_nhan.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/change_password.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/enter_code.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/item_con_nhan.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_connhan.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/layout/them_cong_nhan.xml" value="0.19375" />

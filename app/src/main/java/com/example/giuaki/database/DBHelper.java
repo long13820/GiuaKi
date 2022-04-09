@@ -31,7 +31,7 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChiTietChamCong(MaCC VARCHAR(5) PRIMARY KEY,"+ "SoTP INTEGER,SoPP INTEGER, MaSP VARCHAR(5),FOREIGN KEY(MaSP) REFERENCES SanPham(MaSP))");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS SanPham(MaSP VARCHAR(5) PRIMARY KEY, TenSP VARCHAR,DonGia INTEGER)");
 
-        //Them du lieu cong nhan
+        //Them du lieu user
 
         sqLiteDatabase.execSQL("INSERT INTO users VALUES ('hung','123')");
         sqLiteDatabase.execSQL("INSERT INTO users VALUES ('dan','123')");
@@ -129,6 +129,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.insert("CongNhan", null, values);
         db.close();
     }
+
     public Boolean checkMaCN(String maCN){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from CongNhan where MaCN=?", new String[] {maCN});
@@ -148,6 +149,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.update("congNhan", values,   "MaCN = ?",
                 new String[] { String.valueOf(congNhan.getMaCN()) });
     }
+
 
     public void setTaiKhoan(String taiKhoan){
         userName = taiKhoan;
@@ -204,5 +206,10 @@ public class DBHelper extends SQLiteOpenHelper {
             detailTimekeepings.add(itemdetailTimekeeping);
         }
         return detailTimekeepings;
+
+    public boolean deleteCongNhan(String maCN) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete("congNhan", "MaCn = ?", new String[]{maCN}) > 0;
+
     }
 }

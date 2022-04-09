@@ -44,6 +44,10 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MenuActivity.this, DetailTimekeepingActivity.class);
+                // chỗ này chỉ set tạm để demo cái send mail khi đổi mk
+                //nào làm cái chi tiết user thêm cái button change mk thì set lại
+                // khi nào làm thì đổi lại
+                Intent intent = new Intent(MenuActivity.this, ChangePassActivity.class);
                 startActivity(intent);
             }
         });
