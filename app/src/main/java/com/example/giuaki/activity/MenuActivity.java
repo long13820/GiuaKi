@@ -40,13 +40,13 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//        cvDetail.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity2.this, ManageDetail.class);
-//                startActivity(intent);
-//            }
-//        });
+        cvDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MenuActivity.this, DetailTimekeepingActivity.class);
+                startActivity(intent);
+            }
+        });
 //        cvProduct.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {

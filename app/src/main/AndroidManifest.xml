@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GiuaKi">
         <activity
+            android:name=".activity.DetailTimekeepingActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.CongNhanActivity"
             android:exported="false" />
         <activity
