@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 import com.example.giuaki.model.CongNhan;
+import com.example.giuaki.model.DetailTimekeeping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static Context context;
     public static String DB_NAME = "TimeKeeping.sqlite";
     public static int DB_VERSION = 1;
+    public static String userName = "";
     public DBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         this.context = context;
@@ -147,8 +149,67 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.update("congNhan", values,   "MaCN = ?",
                 new String[] { String.valueOf(congNhan.getMaCN()) });
     }
+
+
+    public void setTaiKhoan(String taiKhoan){
+        userName = taiKhoan;
+    }
+
+    public String getTaiKhoan(){
+        return userName;
+    }
+
+    public String getMaCN(String taiKhoan){
+        String maCN = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from users where username=?", new String[]{taiKhoan});
+
+        while (cursor.moveToNext()){
+            maCN = cursor.getString(2);
+        }
+        return maCN;
+    }
+
+    public String getTenSanPham(String maSP){
+        String tenSP = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from SanPham where MaSP=?", new String[]{maSP});
+
+        while (cursor.moveToNext()){
+            tenSP = cursor.getString(1);
+        }
+        return tenSP;
+    }
+
+    public String getGiaSanPham(String maSP){
+        String gia = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from SanPham where MaSP=?", new String[]{maSP});
+
+        while (cursor.moveToNext()) {
+            gia = cursor.getString(2);
+        }
+        return gia;
+    }
+
+    public ArrayList<DetailTimekeeping> getAllDetailTimekeeping(String maCC) {
+        ArrayList<DetailTimekeeping> detailTimekeepings = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM ChiTietChamCong where maCC=?", new String[]{maCC});
+        cursor.moveToFirst();
+        //MaCC SoTP SoPP MaSP
+        //name price value valueErr sum
+        while (cursor.isAfterLast() == false) {
+            DetailTimekeeping itemdetailTimekeeping = new DetailTimekeeping(getTenSanPham(cursor.getString(3)), getGiaSanPham(cursor.getString(3)), cursor.getString(1), cursor.getString(2), (Integer) (Integer.parseInt(getGiaSanPham(cursor.getString(3)))*Integer.parseInt(cursor.getString(1))));
+            cursor.moveToNext();
+            detailTimekeepings.add(itemdetailTimekeeping);
+        }
+        return detailTimekeepings;
+
     public boolean deleteCongNhan(String maCN) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete("congNhan", "MaCn = ?", new String[]{maCN}) > 0;
+
     }
 }

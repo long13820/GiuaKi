@@ -12,6 +12,9 @@
         <activity
             android:name=".activity.ChangePassActivity"
             android:exported="false" />
+      <activity
+            android:name=".activity.DetailTimekeepingActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.CongNhanActivity"
             android:exported="false" />
