@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    android:background="@drawable/dialog"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_margin="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dialogtop"
+        android:gravity="center"
+        android:padding="12dp"
+        android:text="Thêm Sản Phẩm"
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:padding="12sp"
+        android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/tv_TenSP"
+        android:layout_width="match_parent"
+        android:background="@drawable/border_edittext"
+        android:layout_height="wrap_content"
+        android:padding="12sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:hint="Tên Sản Phẩm" />
+    <EditText
+        android:id="@+id/insert_value"
+        android:layout_width="match_parent"
+        android:background="@drawable/border_edittext"
+        android:layout_height="wrap_content"
+        android:padding="12sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:hint="Nhập Số Lượng Sản Phẩm" />
+
+    <EditText
+        android:id="@+id/insert_valueErr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/border_edittext"
+        android:hint="Nhập Số Lượng Sản Phẩm Lỗi"
+        android:padding="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_them_item_timekeeping"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_dongy_dangki"
+            android:text="Thêm"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            app:backgroundTint="#00CCCC" />
+
+        <Button
+            android:id="@+id/btn_thoat"
+            android:layout_marginRight="10dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_dongy_dangki"
+            android:text="Hủy"
+            android:textSize="14sp"
+            app:backgroundTint="@android:color/darker_gray" />
+    </LinearLayout>
+
+
+</LinearLayout>

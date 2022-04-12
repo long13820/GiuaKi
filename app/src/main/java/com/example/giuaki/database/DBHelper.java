@@ -19,16 +19,18 @@ public class DBHelper extends SQLiteOpenHelper {
     public static String DB_NAME = "TimeKeeping.sqlite";
     public static int DB_VERSION = 1;
     public static String userName = "";
+
     public DBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
         this.context = context;
     }
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("create table users(username TEXT primary key, password TEXT) ");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS CongNhan(MaCN VARCHAR(5) PRIMARY KEY,HoCN VARCHAR(100),TenCN VARCHAR(100),PhanXuong VARCHAR(100))");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChamCong(MaCC VARCHAR(5) PRIMARY KEY," + " NgayCC DATE,MaCN VARCHAR(5),FOREIGN KEY(MaCN) REFERENCES ChamCong(MaCN))");
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChiTietChamCong(MaCC VARCHAR(5) PRIMARY KEY,"+ "SoTP INTEGER,SoPP INTEGER, MaSP VARCHAR(5),FOREIGN KEY(MaSP) REFERENCES SanPham(MaSP))");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChiTietChamCong(MaCC VARCHAR(5) PRIMARY KEY," + "SoTP INTEGER,SoPP INTEGER, MaSP VARCHAR(5),FOREIGN KEY(MaSP) REFERENCES SanPham(MaSP))");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS SanPham(MaSP VARCHAR(5) PRIMARY KEY, TenSP VARCHAR,DonGia INTEGER)");
 
         //Them du lieu user
@@ -68,7 +70,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int i1) {
         sqLiteDatabase.execSQL("drop table if exists users");
     }
-    public Boolean insertData(String username, String password){
+
+    public Boolean insertData(String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -76,112 +79,126 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put("password", password);
 
         long result = db.insert("users", null, values);
-        if(result == -1) return false;
+        if (result == -1) return false;
 
         else return true;
     }
-    public void setUpdate(String username,String password){
+
+    public void setUpdate(String username, String password) {
         SQLiteDatabase myDB = this.getWritableDatabase();
-        myDB.execSQL("INSERT INTO user VALUES ('"+username+"','"+password+"')");
+        myDB.execSQL("INSERT INTO user VALUES ('" + username + "','" + password + "')");
 
     }
-    public Boolean checkUsername(String username){
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from users where username=?", new String[] {username});
 
-        if(cursor.getCount()>0){
+    public Boolean checkUsername(String username) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from users where username=?", new String[]{username});
+
+        if (cursor.getCount() > 0) {
             return true;
-        }
-        else return false;
+        } else return false;
     }
-    public Boolean checkUsernamePassword(String username,String password){
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from users where username=? and password=?", new String[] {username,password});
 
-        if(cursor.getCount()>0){
+    public Boolean checkUsernamePassword(String username, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from users where username=? and password=?", new String[]{username, password});
+
+        if (cursor.getCount() > 0) {
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
     public List<CongNhan> getAllEmployees() {
-        List<CongNhan>  congNhans = new ArrayList<>();
+        List<CongNhan> congNhans = new ArrayList<>();
         String query = "SELECT * FROM CongNhan";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
 
-        while(cursor.isAfterLast() == false) {
+        while (cursor.isAfterLast() == false) {
             CongNhan congNhan = new CongNhan(cursor.getString(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
             cursor.moveToNext();
             congNhans.add(congNhan);
         }
         return congNhans;
     }
+
     public void themCongNhan(CongNhan congNhan) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("MaCN",congNhan.getMaCN());
-        values.put("HoCN",congNhan.getHo());
-        values.put("TenCN",congNhan.getTen());
-        values.put("PhanXuong",congNhan.getPhan_xuong());
+        values.put("MaCN", congNhan.getMaCN());
+        values.put("HoCN", congNhan.getHo());
+        values.put("TenCN", congNhan.getTen());
+        values.put("PhanXuong", congNhan.getPhan_xuong());
         db.insert("CongNhan", null, values);
         db.close();
     }
 
-    public Boolean checkMaCN(String maCN){
+    public void themChiTietChamCong(DetailTimekeeping value) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("select * from CongNhan where MaCN=?", new String[] {maCN});
+        ContentValues values = new ContentValues();
+        // MaCC SoTP SoPP MaSP
+        values.put("MaCC", "1");
+        values.put("SoTP", value.getValue());
+        values.put("SoPP", value.getProductErr());
+        values.put("MaSP", getMaSP(value.getNameProduct()));
+        db.insert("ChiTietChamCong", null, values);
+        db.close();
+    }
 
-        if(cursor.getCount()>0) return true;
+    public Boolean checkMaCN(String maCN) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from CongNhan where MaCN=?", new String[]{maCN});
+
+        if (cursor.getCount() > 0) return true;
         return false;
     }
 
     public int updateCongNhan(CongNhan congNhan) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("MaCN",congNhan.getMaCN());
-        values.put("HoCN",congNhan.getHo());
-        values.put("TenCN",congNhan.getTen());
-        values.put("PhanXuong",congNhan.getPhan_xuong());
+        values.put("MaCN", congNhan.getMaCN());
+        values.put("HoCN", congNhan.getHo());
+        values.put("TenCN", congNhan.getTen());
+        values.put("PhanXuong", congNhan.getPhan_xuong());
         // updating row
-        return db.update("congNhan", values,   "MaCN = ?",
-                new String[] { String.valueOf(congNhan.getMaCN()) });
+        return db.update("congNhan", values, "MaCN = ?",
+                new String[]{String.valueOf(congNhan.getMaCN())});
     }
 
 
-    public void setTaiKhoan(String taiKhoan){
+    public void setTaiKhoan(String taiKhoan) {
         userName = taiKhoan;
     }
 
-    public String getTaiKhoan(){
+    public String getTaiKhoan() {
         return userName;
     }
 
-    public String getMaCN(String taiKhoan){
+    public String getMaCN(String taiKhoan) {
         String maCN = "";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from users where username=?", new String[]{taiKhoan});
 
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             maCN = cursor.getString(2);
         }
         return maCN;
     }
 
-    public String getTenSanPham(String maSP){
+    public String getTenSanPham(String maSP) {
         String tenSP = "";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from SanPham where MaSP=?", new String[]{maSP});
 
-        while (cursor.moveToNext()){
+        while (cursor.moveToNext()) {
             tenSP = cursor.getString(1);
         }
         return tenSP;
     }
 
-    public String getGiaSanPham(String maSP){
+    public String getGiaSanPham(String maSP) {
         String gia = "";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("select * from SanPham where MaSP=?", new String[]{maSP});
@@ -190,6 +207,17 @@ public class DBHelper extends SQLiteOpenHelper {
             gia = cursor.getString(2);
         }
         return gia;
+    }
+
+    public String getMaSP(String tenSP) {
+        String MaSP = "";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from SanPham where TenSP=?", new String[]{tenSP});
+
+        while (cursor.moveToNext()) {
+            MaSP = cursor.getString(0);
+        }
+        return MaSP;
     }
 
     public ArrayList<DetailTimekeeping> getAllDetailTimekeeping(String maCC) {
@@ -201,15 +229,42 @@ public class DBHelper extends SQLiteOpenHelper {
         //MaCC SoTP SoPP MaSP
         //name price value valueErr sum
         while (cursor.isAfterLast() == false) {
-            DetailTimekeeping itemdetailTimekeeping = new DetailTimekeeping(getTenSanPham(cursor.getString(3)), getGiaSanPham(cursor.getString(3)), cursor.getString(1), cursor.getString(2), (Integer) (Integer.parseInt(getGiaSanPham(cursor.getString(3)))*Integer.parseInt(cursor.getString(1))));
+            DetailTimekeeping itemdetailTimekeeping = new DetailTimekeeping(getTenSanPham(cursor.getString(3)), getGiaSanPham(cursor.getString(3)), cursor.getString(1), cursor.getString(2), (Integer) (Integer.parseInt(getGiaSanPham(cursor.getString(3))) * Integer.parseInt(cursor.getString(1))));
             cursor.moveToNext();
             detailTimekeepings.add(itemdetailTimekeeping);
         }
         return detailTimekeepings;
+    }
+
+    public ArrayList<String> getAllSanPham() {
+        ArrayList<String> ListTenSP = new ArrayList<>();
+        //MaSP TenSP Gia
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM SanPham ", null);
+        cursor.moveToFirst();
+        while (cursor.isAfterLast() == false) {
+            String tenSP = cursor.getString(1);
+            cursor.moveToNext();
+            ListTenSP.add(tenSP);
+        }
+        return ListTenSP;
+    }
+
+    public int updateItemDetailTimekeeping(String SL, String SLErr, String name ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("MaCC", "1");
+        values.put("SoTP", SL);
+        values.put("SoPP", SLErr);
+        values.put("MaSP", getMaSP(name));
+        //ChiTietChamCong(MaCC VARCHAR(5) PRIMARY KEY," + "SoTP INTEGER,SoPP INTEGER, MaSP VARCHAR(5),FOREIGN KEY(MaSP) REFERENCES SanPham(MaSP))");
+        // updating row
+        return db.update("ChiTietChamCong", values, "MaCC = ? AND MaSP=?",
+                new String[]{"1",getMaSP(name)});
+    }
 
     public boolean deleteCongNhan(String maCN) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete("congNhan", "MaCn = ?", new String[]{maCN}) > 0;
-
     }
 }

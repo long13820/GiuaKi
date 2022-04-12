@@ -47,7 +47,7 @@ public class MenuActivity extends AppCompatActivity {
                 // chỗ này chỉ set tạm để demo cái send mail khi đổi mk
                 //nào làm cái chi tiết user thêm cái button change mk thì set lại
                 // khi nào làm thì đổi lại
-                Intent intent = new Intent(MenuActivity.this, ChangePassActivity.class);
+                //Intent intent = new Intent(MenuActivity.this, ChangePassActivity.class);
                 startActivity(intent);
             }
         });

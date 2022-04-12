@@ -11,18 +11,33 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="50dp"
+            android:layout_marginLeft="35dp"
             android:layout_marginTop="15dp"
             android:text="CODE : "
             android:textSize="20dp"
             android:textStyle="bold"></TextView>
 
         <TextView
+            android:layout_marginRight="20dp"
             android:id="@+id/codeCN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="20dp"></TextView>
+
+        <Button
+            android:id="@+id/btn_reloadDetail"
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Load"
+            android:layout_marginRight="20sp"></Button>
+        <Button
+            android:id="@+id/btn_addItemDetail"
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"></Button>
     </LinearLayout>
 
     <ListView
@@ -69,6 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,8 +97,8 @@
             android:id="@+id/sum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:layout_marginRight="30dp"></TextView>
+            android:layout_marginRight="30dp"
+            android:textSize="25dp"></TextView>
 
         <Button
             android:layout_width="wrap_content"
