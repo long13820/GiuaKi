@@ -42,8 +42,8 @@ public class ChangePassActivity extends AppCompatActivity {
 
     void chnagePass(){
         if(pass.getText().toString().trim().equals("")
-        ||newPass.getText().toString().trim().equals("")
-        ||confirmPass.getText().toString().trim().equals("")){
+                ||newPass.getText().toString().trim().equals("")
+                ||confirmPass.getText().toString().trim().equals("")){
             Toast.makeText(this, "Không được để trống", Toast.LENGTH_SHORT).show();
         }else if(!pass.getText().toString().trim().equals("")
                 && !newPass.getText().toString().trim().equals("")

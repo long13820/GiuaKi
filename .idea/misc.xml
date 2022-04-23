@@ -9,22 +9,43 @@
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/border_edittext.xml" value="0.2355" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/dialog.xml" value="0.2355" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/dialogtop.xml" value="0.2355" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/ic_back.xml" value="0.27" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/ic_baseline_add_circle_24.xml" value="0.2095" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/ic_call.xml" value="0.2355" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/ic_next.xml" value="0.1985" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/pass.xml" value="0.2355" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/round_border.xml" value="0.2355" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/round_bt.xml" value="0.2355" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/search_back.xml" value="0.27" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/user.xml" value="0.2355" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/wave.xml" value="0.2355" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxxhdpi/background_image.xml" value="0.14" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxxhdpi/boder_spinner.xml" value="0.235" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxxhdpi/ic_feed.xml" value="0.196" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable/ic_round_add.xml" value="0.214" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_cham_cong.xml" value="0.338768115942029" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_change_pass.xml" value="0.14722222222222223" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_cong_nhan.xml" value="0.20677083333333332" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_detail_timekeeping.xml" value="0.20677083333333332" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_edit_detail_timekeeping.xml" value="0.190625" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_home.xml" value="0.338768115942029" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_introduce.xml" value="0.338768115942029" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_login.xml" value="0.338768115942029" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_menu.xml" value="0.20208333333333334" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_menu2.xml" value="0.338768115942029" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_signup.xml" value="0.338768115942029" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_timekeeping.xml" value="0.22864583333333333" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/chamcong2.xml" value="0.338768115942029" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/custom_pinner.xml" value="0.29438405797101447" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/dangki.xml" value="0.338768115942029" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/dialog_sua_cham_cong.xml" value="0.190625" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/dialog_sua_cham_cong_1.xml" value="0.17083333333333334" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/dialog_them_cham_cong.xml" value="0.264" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/ic_round_add.xml" value="0.20677083333333332" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/item_con_nhan.xml" value="0.18802083333333333" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/list_cham_cong.xml" value="0.18802083333333333" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/them_cong_nhan.xml" value="0.536" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/update_cong_nhan.xml" value="0.190625" />
         <entry key="..\:/Hoc Online/Project Mobile/GiuaKi/app/src/main/res/layout/activity_add_item_timekeeping.xml" value="0.11302083333333333" />
         <entry key="..\:/Hoc Online/Project Mobile/GiuaKi/app/src/main/res/layout/activity_custom_lvdetail_timekeeping.xml" value="0.24003623188405798" />
         <entry key="..\:/Hoc Online/Project Mobile/GiuaKi/app/src/main/res/layout/activity_detail_timekeeping.xml" value="0.23854166666666668" />
