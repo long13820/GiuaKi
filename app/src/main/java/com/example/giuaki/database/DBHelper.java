@@ -10,54 +10,98 @@ import androidx.annotation.Nullable;
 
 import com.example.giuaki.model.CongNhan;
 import com.example.giuaki.model.DetailTimekeeping;
+import com.example.giuaki.model.Users;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
-    public static Context context;
+
     public static String DB_NAME = "TimeKeeping.sqlite";
     public static int DB_VERSION = 1;
-    public static String userName = "";
+   ;
+
+    private static DBHelper sInstance;
 
     public DBHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
-        this.context = context;
+    }
+
+    public static synchronized DBHelper getInstance(Context context) {
+        // Use the application context, which will ensure that you
+        // don't accidentally leak an Activity's context.
+        // See this article for more information: http://bit.ly/6LRzfx
+        if (sInstance == null) {
+            sInstance = new DBHelper(context.getApplicationContext());
+        }
+        return sInstance;
+    }
+    //Truy van khong tra ket qua
+    public void QueryData(String sql) {
+        SQLiteDatabase database = getWritableDatabase();
+        database.execSQL(sql);
+    }
+
+
+    //Truy van tra ket qua
+    public Cursor GetData(String sql) {
+        SQLiteDatabase database = getReadableDatabase();
+        return database.rawQuery(sql, null);
     }
 
     @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);
+    }
+
+
+    @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
+//        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS CongNhan(MaCN VARCHAR(5) PRIMARY KEY,HoCN VARCHAR(100),TenCN VARCHAR(100),PhanXuong VARCHAR(100))");
+//        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChamCong(MaCC INTEGER PRIMARY KEY,NgayCC VARCHAR(100), MaCN VARCHAR(5))");
         sqLiteDatabase.execSQL("create table users(username TEXT primary key, password TEXT) ");
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS CongNhan(MaCN VARCHAR(5) PRIMARY KEY,HoCN VARCHAR(100),TenCN VARCHAR(100),PhanXuong VARCHAR(100))");
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChamCong(MaCC VARCHAR(5) PRIMARY KEY," + " NgayCC DATE,MaCN VARCHAR(5),FOREIGN KEY(MaCN) REFERENCES ChamCong(MaCN))");
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChiTietChamCong(MaCC VARCHAR(5) PRIMARY KEY," + "SoTP INTEGER,SoPP INTEGER, MaSP VARCHAR(5),FOREIGN KEY(MaSP) REFERENCES SanPham(MaSP))");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " +
+                "CongNhan" +
+                "(MaCN VARCHAR(5) PRIMARY KEY" +
+                ",HoCN VARCHAR(100)" +
+                ",TenCN VARCHAR(100)" +
+                ",PhanXuong VARCHAR(100))" +
+                "");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChamCong" +
+                "(MaCC INTEGER PRIMARY KEY" +
+                ",NgayCC DATE" +
+                ",MaCN VARCHAR(5)" +
+                ", FOREIGN KEY (MaCN)" +
+                " REFERENCES CongNhan (MaCN)" +
+                ")");
+
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChiTietChamCong(MaCC VARCHAR(5) PRIMARY KEY,SoTP INTEGER,SoPP INTEGER, MaSP VARCHAR(5),FOREIGN KEY(MaSP) REFERENCES SanPham(MaSP))");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS SanPham(MaSP VARCHAR(5) PRIMARY KEY, TenSP VARCHAR,DonGia INTEGER)");
 
-        //Them du lieu user
 
-        sqLiteDatabase.execSQL("INSERT INTO users VALUES ('hung','123')");
-        sqLiteDatabase.execSQL("INSERT INTO users VALUES ('dan','123')");
-        sqLiteDatabase.execSQL("INSERT INTO users VALUES ('duc','123')");
+        sqLiteDatabase.execSQL("INSERT INTO users VALUES ('a', '1' )");
 
         //Them du lieu cong nhan
         sqLiteDatabase.execSQL("INSERT INTO CongNhan VALUES ('CN1','Nguyen','Hung','Bình Chánh')");
-        sqLiteDatabase.execSQL("INSERT INTO CongNhan VALUES ('CN2','Tran','Dan','Tân Phú')");
+        sqLiteDatabase.execSQL("INSERT INTO CongNhan VALUES ('CN2','Tran','Long','Tân Phú')");
         sqLiteDatabase.execSQL("INSERT INTO CongNhan VALUES ('CN3','Nguyen','Duc','Thủ Đức')");
 
         //Them du lieu cham cong
-        sqLiteDatabase.execSQL("INSERT INTO ChamCong VALUES ('1','20/06/2021', 'CN1')");
-        sqLiteDatabase.execSQL("INSERT INTO ChamCong VALUES ('2','07/07/2021', 'CN1')");
-        sqLiteDatabase.execSQL("INSERT INTO ChamCong VALUES ('3','02/01/2021', 'CN2')");
-        sqLiteDatabase.execSQL("INSERT INTO ChamCong VALUES ('4','05/03/2021', 'CN2')");
-        sqLiteDatabase.execSQL("INSERT INTO ChamCong VALUES ('5','25/05/2021', 'CN3')");
+        sqLiteDatabase.execSQL("INSERT INTO ChamCong VALUES (1,'2022-04-17', 'CN1')");
+        sqLiteDatabase.execSQL("INSERT INTO ChamCong VALUES (2,'2022-04-17', 'CN1')");
+        sqLiteDatabase.execSQL("INSERT INTO ChamCong VALUES (3,'2022-04-17', 'CN2')");
+        sqLiteDatabase.execSQL("INSERT INTO ChamCong VALUES (4,'2022-04-17', 'CN2')");
+        sqLiteDatabase.execSQL("INSERT INTO ChamCong VALUES (5,'2022-04-17', 'CN3')");
 
-        //Them du lieu chi tiet phieu nhap
-        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('1',4, 1, 'SP1')");
-        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('2',2, 0, 'SP2')");
-        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('3',3, 1, 'SP3')");
-        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('4',2, 1, 'SP1')");
-        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('5',4, 1, 'SP2')");
 
+//        //Them du lieu chi tiet phieu nhap
+//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('1',4, 1, 'SP1')");
+//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('2',2, 0, 'SP2')");
+//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('3',3, 1, 'SP3')");
+//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('4',2, 1, 'SP1')");
+//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('5',4, 1, 'SP2')");
+//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('6',3, 3, 'SP3')");
 
         //Them du lieu San Pham
         sqLiteDatabase.execSQL("INSERT INTO SanPham VALUES ('SP1','Gạch ống', 10000)");
@@ -68,20 +112,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int i1) {
-        sqLiteDatabase.execSQL("drop table if exists users");
-    }
 
-    public Boolean insertData(String username, String password) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-        values.put("username", username);
-        values.put("password", password);
-
-        long result = db.insert("users", null, values);
-        if (result == -1) return false;
-
-        else return true;
     }
 
     public void setUpdate(String username, String password) {
@@ -89,6 +120,7 @@ public class DBHelper extends SQLiteOpenHelper {
         myDB.execSQL("INSERT INTO user VALUES ('" + username + "','" + password + "')");
 
     }
+
 
     public Boolean checkUsername(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -107,6 +139,22 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         } else return false;
     }
+
+
+    public Boolean insertData(String username, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("username", username);
+        values.put("password", password);
+
+        long result = db.insert("users", null, values);
+        if (result == -1) return false;
+
+        else return true;
+    }
+
+
 
     public List<CongNhan> getAllEmployees() {
         List<CongNhan> congNhans = new ArrayList<>();
@@ -168,13 +216,13 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public void setTaiKhoan(String taiKhoan) {
-        userName = taiKhoan;
-    }
+//    public void setTaiKhoan(String taiKhoan) {
+//        userName = taiKhoan;
+//    }
 
-    public String getTaiKhoan() {
-        return userName;
-    }
+//    public String getTaiKhoan() {
+//        return userName;
+//    }
 
     public String getMaCN(String taiKhoan) {
         String maCN = "";

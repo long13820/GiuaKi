@@ -49,13 +49,12 @@ public class CongNhanActivity extends AppCompatActivity {
     void insertCongNhan(){
         Dialog dialog = new Dialog(this);
         dialog.setTitle("Thêm công nhân");
-        dialog.setCancelable(false);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.them_cong_nhan);
         Window window = dialog.getWindow();
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
+
         EditText maCN = (EditText)dialog.findViewById(R.id.insert_id_cn);
         EditText ho = (EditText)dialog.findViewById(R.id.insert_ho_cn);
         EditText ten = (EditText)dialog.findViewById(R.id.insert_ten_cn);

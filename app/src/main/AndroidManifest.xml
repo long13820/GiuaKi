@@ -12,13 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GiuaKi">
         <activity
+            android:name=".activity.ChangePassActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".activity.ChamCongActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.AddItemTimekeeping"
             android:exported="false" />
         <activity
             android:name=".activity.Edit_DetailTimekeeping"
-            android:exported="false" />
-        <activity
-            android:name=".activity.ChangePassActivity"
             android:exported="false" />
         <activity
             android:name=".activity.DetailTimekeepingActivity"
@@ -27,13 +34,7 @@
             android:name=".activity.CongNhanActivity"
             android:exported="false" />
         <activity
-            android:name=".activity.ChamCongActivity"
-            android:exported="false" />
-        <activity
             android:name=".activity.MenuActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

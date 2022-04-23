@@ -1,47 +1,49 @@
 package com.example.giuaki.model;
 
-public class CongNhan {
-    private String maCN;
-    private String ho;
-    private String ten;
-    private String phan_xuong;
+import java.io.Serializable;
+
+public class CongNhan implements Serializable {
+    private String MaCN;
+    private String Ho;
+    private String Ten;
+    private String PhanXuong;
 
     public String getPhan_xuong() {
-        return phan_xuong;
+        return PhanXuong;
     }
 
     public void setPhan_xuong(String phan_xuong) {
-        this.phan_xuong = phan_xuong;
+        PhanXuong = phan_xuong;
     }
 
     public CongNhan(String maCN, String ho, String ten,String phan_xuong) {
-        this.maCN = maCN;
-        this.ho = ho;
-        this.ten = ten;
-        this.phan_xuong = phan_xuong;
+        MaCN = maCN;
+        Ho = ho;
+        Ten = ten;
+        PhanXuong = phan_xuong;
     }
 
     public String getMaCN() {
-        return maCN;
+        return MaCN;
     }
 
     public void setMaCN(String maCN) {
-        this.maCN = maCN;
+        MaCN = maCN;
     }
 
     public String getHo() {
-        return ho;
+        return Ho;
     }
 
     public void setHo(String ho) {
-        this.ho = ho;
+        Ho = ho;
     }
 
     public String getTen() {
-        return ten;
+        return Ten;
     }
 
     public void setTen(String ten) {
-        this.ten = ten;
+        Ten = ten;
     }
 }
