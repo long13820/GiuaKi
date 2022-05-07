@@ -18,6 +18,7 @@ import com.example.giuaki.R;
 import com.example.giuaki.adapter.SanPhamAdapter;
 import com.example.giuaki.database.DBHelper;
 import com.example.giuaki.model.SanPham;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class SanPhamActivity extends AppCompatActivity {
     private SanPhamAdapter adapter;
     private ListView listView;
     private Button btnInsert;
+    FloatingActionButton floatingActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +40,9 @@ public class SanPhamActivity extends AppCompatActivity {
         adapter = new SanPhamAdapter(this,R.layout.item_san_pham);
         adapter.setData(dsSanPham);
         listView.setAdapter(adapter);
+        floatingActionButton = findViewById(R.id.floatingInsertActionButton);
         btnInsert = findViewById(R.id.insert_san_pham);
-        btnInsert.setOnClickListener(view -> {
+        floatingActionButton.setOnClickListener(view -> {
             insertSanPham();
         });
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
