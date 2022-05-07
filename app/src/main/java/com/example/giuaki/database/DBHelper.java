@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.example.giuaki.model.CongNhan;
 import com.example.giuaki.model.DetailTimekeeping;
-import com.example.giuaki.model.Users;
+import com.example.giuaki.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +60,13 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 //        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS CongNhan(MaCN VARCHAR(5) PRIMARY KEY,HoCN VARCHAR(100),TenCN VARCHAR(100),PhanXuong VARCHAR(100))");
 //        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChamCong(MaCC INTEGER PRIMARY KEY,NgayCC VARCHAR(100), MaCN VARCHAR(5))");
-        sqLiteDatabase.execSQL("create table users(username TEXT primary key, password TEXT) ");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " +
+                "User(ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "FIRSTNAME VARCHAR(100)," +
+                "LASTNAME VARCHAR(100)," +
+                "EMAIL VARCHAR(100), " +
+                "PASSWORD VARCHAR(100)," +
+                "IMAGE VARCHAR(5000))");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " +
                 "CongNhan" +
                 "(MaCN VARCHAR(5) PRIMARY KEY" +
@@ -80,7 +86,6 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS SanPham(MaSP VARCHAR(5) PRIMARY KEY, TenSP VARCHAR,DonGia INTEGER)");
 
 
-        sqLiteDatabase.execSQL("INSERT INTO users VALUES ('a', '1' )");
 
         //Them du lieu cong nhan
         sqLiteDatabase.execSQL("INSERT INTO CongNhan VALUES ('CN1','Nguyen','Hung','Bình Chánh')");
@@ -94,6 +99,10 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO ChamCong VALUES (4,'2022-04-17', 'CN2')");
         sqLiteDatabase.execSQL("INSERT INTO ChamCong VALUES (5,'2022-04-17', 'CN3')");
 
+
+        //user
+
+        sqLiteDatabase.execSQL("INSERT INTO User(FIRSTNAME,LASTNAME, EMAIL, PASSWORD) VALUES ('admin','1','a','1')");
 
 //        //Them du lieu chi tiet phieu nhap
 //        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('1',4, 1, 'SP1')");
@@ -114,6 +123,59 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int i1) {
 
     }
+
+    public int addUser(User user) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        String selection = "WHERE EMAIL='" + user.getEmail() + "'";
+
+        Cursor cursor = db.rawQuery("SELECT * FROM User " + selection, null);
+        int count = cursor.getCount();
+
+        if (count>1) {
+            return 1;
+        }
+
+        db.execSQL("INSERT INTO User(FIRSTNAME,LASTNAME, EMAIL, PASSWORD, IMAGE) VALUES ('" + user.getFirstname()
+                + "','" + user.getLastname()
+                + "','" + user.getEmail()
+                + "','" + user.getPassword()
+                + "','" + user.getImageBitmap()
+                + "')");
+        return 0;
+    }
+
+    public User checkUserExist(String username, String password) {
+        User user = null;
+        SQLiteDatabase db = getReadableDatabase();
+
+        String selection = "WHERE EMAIL='" + username + "' and PASSWORD = '" + password + "'";
+
+        Cursor cursor = db.rawQuery("SELECT * FROM User " + selection, null);
+        int count = cursor.getCount();
+        System.out.println(count + "");
+        while (cursor.moveToNext()) {
+            user = new User(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(5)
+            );
+        }
+
+        cursor.close();
+        close();
+
+        if (count > 0) {
+            return user;
+        } else {
+            return null;
+        }
+    }
+
+
 
     public void setUpdate(String username, String password) {
         SQLiteDatabase myDB = this.getWritableDatabase();
@@ -216,13 +278,6 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-//    public void setTaiKhoan(String taiKhoan) {
-//        userName = taiKhoan;
-//    }
-
-//    public String getTaiKhoan() {
-//        return userName;
-//    }
 
     public String getMaCN(String taiKhoan) {
         String maCN = "";

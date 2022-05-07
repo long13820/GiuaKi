@@ -19,10 +19,16 @@
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/search_back.xml" value="0.27" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/user.xml" value="0.2355" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxhdpi/wave.xml" value="0.2355" />
+<<<<<<< Updated upstream
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxxhdpi/background_image.xml" value="0.14" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxxhdpi/boder_spinner.xml" value="0.235" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxxhdpi/ic_feed.xml" value="0.196" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable/ic_round_add.xml" value="0.214" />
+=======
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxxhdpi/background_image.xml" value="0.124" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable-xxxhdpi/ic_logout.xml" value="0.1275" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/drawable/btn_bg.xml" value="0.124" />
+>>>>>>> Stashed changes
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_cham_cong.xml" value="0.338768115942029" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_change_pass.xml" value="0.14722222222222223" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_cong_nhan.xml" value="0.20677083333333332" />
@@ -30,10 +36,14 @@
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_edit_detail_timekeeping.xml" value="0.190625" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_home.xml" value="0.338768115942029" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_introduce.xml" value="0.338768115942029" />
-        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_login.xml" value="0.338768115942029" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_login.xml" value="0.2" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_menu.xml" value="0.20208333333333334" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_menu2.xml" value="0.338768115942029" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_new_password.xml" value="0.4" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_otp.xml" value="0.264" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_register.xml" value="0.11302083333333333" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_signup.xml" value="0.338768115942029" />
+<<<<<<< Updated upstream
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_timekeeping.xml" value="0.22864583333333333" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/chamcong2.xml" value="0.338768115942029" />
         <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/custom_pinner.xml" value="0.29438405797101447" />
@@ -57,6 +67,16 @@
         <entry key="..\:/Hoc Online/Project Mobile/GiuaKi/app/src/main/res/layout/item_product_timekeeping.xml" value="0.23854166666666668" />
         <entry key="..\:/Hoc Online/Project Mobile/GiuaKi/app/src/main/res/layout/them_cong_nhan.xml" value="0.23641304347826086" />
         <entry key="..\:/Hoc Online/Project Mobile/GiuaKi/app/src/main/res/layout/them_detail_item_timekeeping.xml" value="0.23641304347826086" />
+=======
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/activity_spash.xml" value="0.36666666666666664" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/app_bar_main.xml" value="0.1936978683966636" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/chamcong2.xml" value="0.338768115942029" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/content_main.xml" value="0.18854166666666666" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/dangki.xml" value="0.338768115942029" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/fragment_home.xml" value="0.18854166666666666" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/fragment_home2.xml" value="0.18854166666666666" />
+        <entry key="..\:/GitHub/GiuaKi/app/src/main/res/layout/splash_screen_bg.xml" value="0.25416666666666665" />
+>>>>>>> Stashed changes
         <entry key="..\:/Users/USER/AndroidStudioProjects/GiuaKi/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.165" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GiuaKi/app/src/main/res/drawable/background_edt.xml" value="0.253" />
         <entry key="..\:/Users/USER/AndroidStudioProjects/GiuaKi/app/src/main/res/drawable/ic_google_plus.xml" value="0.165" />
