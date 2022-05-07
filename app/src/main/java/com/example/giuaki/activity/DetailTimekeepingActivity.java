@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 public class DetailTimekeepingActivity extends AppCompatActivity {
     private TextView tv_sumProduct, tv_sumProductErr, tv_sumPrice, tv_codeCN;
     private Button btnReload, btn_AddItem;
+    private ImageView btnBack;
     private DBHelper dbHelper;
     private ListView lvDetailTK;
     private ArrayList<DetailTimekeeping> arrDetailTK = new ArrayList<>();
@@ -29,6 +31,7 @@ public class DetailTimekeepingActivity extends AppCompatActivity {
         super.onCreate(savedIntanceState);
         setContentView(R.layout.activity_detail_timekeeping);
         dbHelper = new DBHelper(this);
+        btnBack = (ImageView) findViewById(R.id.btnBackChamCong);
         lvDetailTK = (ListView) findViewById(R.id.lv_detail_timekeeping);
         tv_sumPrice = (TextView) findViewById(R.id.sum);
         tv_sumProduct = (TextView) findViewById(R.id.sum_product);
@@ -36,7 +39,9 @@ public class DetailTimekeepingActivity extends AppCompatActivity {
         tv_codeCN = (TextView) findViewById(R.id.codeCN);
         btnReload = findViewById(R.id.btn_reloadDetail);
         btn_AddItem = findViewById(R.id.btn_addItemDetail);
-        arrDetailTK = dbHelper.getAllDetailTimekeeping("1");
+        String maCC = String.valueOf(getIntent().getStringExtra("maCC"));
+        arrDetailTK = dbHelper.getAllDetailTimekeeping(maCC);
+
 
         for (int i = 0; i < arrDetailTK.size(); i++) {
             sumPrice = sumPrice + arrDetailTK.get(i).getSum();
@@ -70,7 +75,8 @@ public class DetailTimekeepingActivity extends AppCompatActivity {
 
         btnReload.setOnClickListener(view -> {
             arrDetailTK.clear();
-            arrDetailTK = dbHelper.getAllDetailTimekeeping("1");
+            arrDetailTK = dbHelper.getAllDetailTimekeeping(maCC);
+            System.out.println("Chi Tiet CHam Cong : " + arrDetailTK);
             sumPrice = sumProduct = sumProductErr = 0;
             for (int i = 0; i < arrDetailTK.size(); i++) {
                 sumPrice = sumPrice + arrDetailTK.get(i).getSum();
@@ -83,6 +89,10 @@ public class DetailTimekeepingActivity extends AppCompatActivity {
             tv_sumProductErr.setText(String.valueOf(sumProductErr));
             CustomLVDetailTimekeeping customLVDetailTimekeeping2 = new CustomLVDetailTimekeeping(this, R.layout.item_detail_timekeeping, arrDetailTK);
             lvDetailTK.setAdapter(customLVDetailTimekeeping2);
+        });
+
+        btnBack.setOnClickListener(view -> {
+            onBackPressed();
         });
     }
 

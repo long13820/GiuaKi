@@ -2,6 +2,7 @@ package com.example.giuaki.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 
 import com.example.giuaki.R;
 import com.example.giuaki.database.DBHelper;
@@ -59,6 +61,9 @@ public class AddItemTimekeeping extends AppCompatActivity {
             if(!value.getText().toString().equals("") && !valueErr.getText().toString().equals("")){
                 DetailTimekeeping Add = new DetailTimekeeping(spinner.getSelectedItem().toString(), "0", value.getText().toString(), valueErr.getText().toString(), 0);
                 dbHelper.themChiTietChamCong(Add);
+
+                Intent intent = new Intent(AddItemTimekeeping.this, DetailTimekeepingActivity.class);
+                startActivity(intent);
             }else{
                 tv_Loi.setText("Vui Lòng Xem Lại Số Lượng Sản Phẩm và Phế Phẩm");
             }

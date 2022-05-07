@@ -10,7 +10,8 @@ import androidx.annotation.Nullable;
 
 import com.example.giuaki.model.CongNhan;
 import com.example.giuaki.model.DetailTimekeeping;
-import com.example.giuaki.model.Users;
+import com.example.giuaki.model.SanPham;
+import com.example.giuaki.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +61,13 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
 //        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS CongNhan(MaCN VARCHAR(5) PRIMARY KEY,HoCN VARCHAR(100),TenCN VARCHAR(100),PhanXuong VARCHAR(100))");
 //        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChamCong(MaCC INTEGER PRIMARY KEY,NgayCC VARCHAR(100), MaCN VARCHAR(5))");
-        sqLiteDatabase.execSQL("create table users(username TEXT primary key, password TEXT) ");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " +
+                "User(ID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "FIRSTNAME VARCHAR(100)," +
+                "LASTNAME VARCHAR(100)," +
+                "EMAIL VARCHAR(100), " +
+                "PASSWORD VARCHAR(100)," +
+                "IMAGE VARCHAR(5000))");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " +
                 "CongNhan" +
                 "(MaCN VARCHAR(5) PRIMARY KEY" +
@@ -76,11 +83,18 @@ public class DBHelper extends SQLiteOpenHelper {
                 " REFERENCES CongNhan (MaCN)" +
                 ")");
 
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChiTietChamCong(MaCC VARCHAR(5) PRIMARY KEY,SoTP INTEGER,SoPP INTEGER, MaSP VARCHAR(5),FOREIGN KEY(MaSP) REFERENCES SanPham(MaSP))");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChiTietChamCong" +
+                "(MaCC" +
+                " REFERENCES ChamCong(MaCC)" +
+                ",SoTP INTEGER" +
+                ",SoPP INTEGER" +
+                ",MaSP VARCHAR(5)" +
+                ",FOREIGN KEY(MaSP)" +
+                " REFERENCES SanPham(MaSP)" +
+                ")");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS SanPham(MaSP VARCHAR(5) PRIMARY KEY, TenSP VARCHAR,DonGia INTEGER)");
 
 
-        sqLiteDatabase.execSQL("INSERT INTO users VALUES ('a', '1' )");
 
         //Them du lieu cong nhan
         sqLiteDatabase.execSQL("INSERT INTO CongNhan VALUES ('CN1','Nguyen','Hung','Bình Chánh')");
@@ -95,13 +109,16 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO ChamCong VALUES (5,'2022-04-17', 'CN3')");
 
 
+        //user
+        sqLiteDatabase.execSQL("INSERT INTO User(FIRSTNAME,LASTNAME, EMAIL, PASSWORD) VALUES ('admin','1','a','1')");
+
 //        //Them du lieu chi tiet phieu nhap
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('1',4, 1, 'SP1')");
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('2',2, 0, 'SP2')");
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('3',3, 1, 'SP3')");
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('4',2, 1, 'SP1')");
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('5',4, 1, 'SP2')");
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('6',3, 3, 'SP3')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('1',4, 1, 'SP1')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('2',2, 0, 'SP2')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('3',3, 1, 'SP3')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('4',2, 1, 'SP1')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('5',4, 1, 'SP2')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('6',3, 3, 'SP3')");
 
         //Them du lieu San Pham
         sqLiteDatabase.execSQL("INSERT INTO SanPham VALUES ('SP1','Gạch ống', 10000)");
@@ -114,6 +131,56 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int i1) {
 
     }
+
+    public int addUser(User user) {
+        SQLiteDatabase db = getWritableDatabase();
+        String selection = "WHERE EMAIL='" + user.getEmail() + "'";
+        Cursor cursor = db.rawQuery("SELECT * FROM User " + selection, null);
+        int count = cursor.getCount();
+        if (count>1) {
+            return 1;
+        }
+
+        db.execSQL("INSERT INTO User(FIRSTNAME,LASTNAME, EMAIL, PASSWORD, IMAGE) VALUES ('" + user.getFirstname()
+                + "','" + user.getLastname()
+                + "','" + user.getEmail()
+                + "','" + user.getPassword()
+                + "','" + user.getImageBitmap()
+                + "')");
+        return 0;
+    }
+
+    public User checkUserExist(String username, String password) {
+        User user = null;
+        SQLiteDatabase db = getReadableDatabase();
+
+        String selection = "WHERE EMAIL='" + username + "' and PASSWORD = '" + password + "'";
+
+        Cursor cursor = db.rawQuery("SELECT * FROM User " + selection, null);
+        int count = cursor.getCount();
+        System.out.println(count + "");
+        while (cursor.moveToNext()) {
+            user = new User(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getString(5)
+            );
+        }
+
+        cursor.close();
+        close();
+
+        if (count > 0) {
+            return user;
+        } else {
+            return null;
+        }
+    }
+
+
 
     public void setUpdate(String username, String password) {
         SQLiteDatabase myDB = this.getWritableDatabase();
@@ -172,6 +239,47 @@ public class DBHelper extends SQLiteOpenHelper {
         return congNhans;
     }
 
+    public List<SanPham> getAllProducts() {
+        List<SanPham> dsSanPham = new ArrayList<>();
+        String query = "SELECT * FROM SanPham";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        while (cursor.isAfterLast() == false) {
+            SanPham sanPham = new SanPham(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+            cursor.moveToNext();
+            dsSanPham.add(sanPham);
+        }
+        return dsSanPham;
+    }
+    public void themSanPham(SanPham sanPham) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("MaSP", sanPham.getMaSP());
+        values.put("TenSP", sanPham.getTenSP());
+        values.put("DonGia", sanPham.getDonGia());
+        db.insert("SanPham", null, values);
+        db.close();
+    }
+
+    public int updateSanPham(SanPham sanPham) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("MaSP", sanPham.getMaSP());
+        values.put("TenSP", sanPham.getTenSP());
+        values.put("DonGia", sanPham.getDonGia());
+        // updating row
+        return db.update("SanPham", values, "MaSP = ?",
+                new String[]{String.valueOf(sanPham.getMaSP())});
+    }
+
+    public boolean xoaSanPham(String maSP) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete("SanPham", "MaSP = ?", new String[]{maSP}) > 0;
+    }
+
     public void themCongNhan(CongNhan congNhan) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -216,13 +324,6 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-//    public void setTaiKhoan(String taiKhoan) {
-//        userName = taiKhoan;
-//    }
-
-//    public String getTaiKhoan() {
-//        return userName;
-//    }
 
     public String getMaCN(String taiKhoan) {
         String maCN = "";
@@ -297,6 +398,8 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return ListTenSP;
     }
+
+
 
     public int updateItemDetailTimekeeping(String SL, String SLErr, String name ) {
         SQLiteDatabase db = this.getWritableDatabase();

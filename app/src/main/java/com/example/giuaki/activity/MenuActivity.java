@@ -2,68 +2,33 @@ package com.example.giuaki.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
+import com.example.giuaki.LoginActivity;
+import com.example.giuaki.PreferenceManager;
 import com.example.giuaki.R;
 
 public class MenuActivity extends AppCompatActivity {
     CardView cvWorker, cvTimekeeping, cvDetail, cvProduct;
+    ImageButton signOut;
 
+    private PreferenceManager preferenceManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        addControls();
-        addEvents();
+
+        FragmentTransaction ft;
+        HomeFragment fragmentHome = new HomeFragment();
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.nav_host_fragment_content_main, fragmentHome).commit();
     }
-    private void addControls(){
-        cvWorker = findViewById(R.id.cvWorker);
-        cvTimekeeping = findViewById(R.id.cvTimekeeping);
-        cvDetail = findViewById(R.id.cvDetail);
-        cvProduct = findViewById(R.id.cvProduct);
-    }
-    private void addEvents() {
-//        cvWorker.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity2.this, ManageWorker.class);
-//                startActivity(intent);
-//            }
-//        });
-        cvTimekeeping.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MenuActivity.this, ChamCongActivity.class);
-                startActivity(intent);
-            }
-        });
-        cvDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MenuActivity.this, DetailTimekeepingActivity.class);
-                // chỗ này chỉ set tạm để demo cái send mail khi đổi mk
-                //nào làm cái chi tiết user thêm cái button change mk thì set lại
-                // khi nào làm thì đổi lại
-                //Intent intent = new Intent(MenuActivity.this, ChangePassActivity.class);
-                startActivity(intent);
-            }
-        });
-//        cvProduct.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainActivity2.this, ManageProduct.class);
-//                startActivity(intent);
-//            }
-//        });
-        cvWorker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MenuActivity.this, CongNhanActivity.class);
-                startActivity(intent);
-            }
-        });
-    }
+
 }

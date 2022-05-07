@@ -18,4 +18,5 @@
     <color name="whiteTextColor">#fff</color>
     <color name="primaryTextColor">#11CFC5</color>
 
+    <color name="input_background">@color/teal_700</color>
 </resources>
