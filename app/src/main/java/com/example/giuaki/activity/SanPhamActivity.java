@@ -107,7 +107,7 @@ public class SanPhamActivity extends AppCompatActivity {
 
         Button btnThem = (Button)dialog.findViewById(R.id.btn_update_san_pham);
         Button btnXoa = (Button)dialog.findViewById(R.id.btn_xoa_san_pham);
-        Button btnback = (Button)dialog.findViewById(R.id.btn_update_thoat);
+        Button btnback = (Button)dialog.findViewById(R.id.btn_thoat_sp);
 
         //set value
         maSP.setText(sanPham.getMaSP());

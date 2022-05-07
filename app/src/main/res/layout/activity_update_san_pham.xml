@@ -88,7 +88,7 @@
             android:textSize="14sp"
             app:backgroundTint="#00CCCC" />
         <Button
-            android:id="@+id/btn_thoat"
+            android:id="@+id/btn_thoat_sp"
             android:layout_marginRight="10dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
