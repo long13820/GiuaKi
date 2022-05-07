@@ -97,13 +97,15 @@
             android:layout_marginLeft="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Huỷ"></Button>
+            android:text="Huỷ"
+            android:background="#00CCCC"></Button>
         <Button
             android:id="@+id/save_button"
             android:layout_marginLeft="150dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lưu"></Button>
+            android:text="Lưu"
+            android:background="#00CCCC"></Button>
     </LinearLayout>
 
     <TextView

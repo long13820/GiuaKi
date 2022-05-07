@@ -8,11 +8,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/btnBackChamCong"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="22dp"
+            android:onClick="btnClick"
+            android:src="@drawable/ic_back"
+            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="35dp"
             android:layout_marginTop="15dp"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
             android:text="CODE : "
             android:textSize="20dp"
             android:textStyle="bold"></TextView>
@@ -31,13 +43,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Load"
-            android:layout_marginRight="20sp"></Button>
+            android:layout_marginRight="20sp"
+            android:background="#00CCCC"></Button>
         <Button
             android:id="@+id/btn_addItemDetail"
             android:layout_marginTop="12dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add"></Button>
+            android:text="Add"
+            android:background="#00CCCC"></Button>
     </LinearLayout>
 
     <ListView
@@ -90,7 +104,7 @@
             android:layout_height="wrap_content"
             android:text="Tổng Tiền : "
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textStyle="bold"></TextView>
 
         <TextView
@@ -103,6 +117,7 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="In"></Button>
+            android:text="In"
+            android:background="#00CCCC"></Button>
     </LinearLayout>
 </LinearLayout>

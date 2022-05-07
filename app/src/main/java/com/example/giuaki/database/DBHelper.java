@@ -83,7 +83,15 @@ public class DBHelper extends SQLiteOpenHelper {
                 " REFERENCES CongNhan (MaCN)" +
                 ")");
 
-        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChiTietChamCong(MaCC VARCHAR(5) PRIMARY KEY,SoTP INTEGER,SoPP INTEGER, MaSP VARCHAR(5),FOREIGN KEY(MaSP) REFERENCES SanPham(MaSP))");
+        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChiTietChamCong" +
+                "(MaCC" +
+                " REFERENCES ChamCong(MaCC)" +
+                ",SoTP INTEGER" +
+                ",SoPP INTEGER" +
+                ",MaSP VARCHAR(5)" +
+                ",FOREIGN KEY(MaSP)" +
+                " REFERENCES SanPham(MaSP)" +
+                ")");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS SanPham(MaSP VARCHAR(5) PRIMARY KEY, TenSP VARCHAR,DonGia INTEGER)");
 
 
@@ -102,16 +110,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
         //user
-
         sqLiteDatabase.execSQL("INSERT INTO User(FIRSTNAME,LASTNAME, EMAIL, PASSWORD) VALUES ('admin','1','a','1')");
 
 //        //Them du lieu chi tiet phieu nhap
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('1',4, 1, 'SP1')");
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('2',2, 0, 'SP2')");
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('3',3, 1, 'SP3')");
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('4',2, 1, 'SP1')");
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('5',4, 1, 'SP2')");
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('6',3, 3, 'SP3')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('1',4, 1, 'SP1')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('2',2, 0, 'SP2')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('3',3, 1, 'SP3')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('4',2, 1, 'SP1')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('5',4, 1, 'SP2')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('6',3, 3, 'SP3')");
 
         //Them du lieu San Pham
         sqLiteDatabase.execSQL("INSERT INTO SanPham VALUES ('SP1','Gạch ống', 10000)");
@@ -127,12 +134,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public int addUser(User user) {
         SQLiteDatabase db = getWritableDatabase();
-
         String selection = "WHERE EMAIL='" + user.getEmail() + "'";
-
         Cursor cursor = db.rawQuery("SELECT * FROM User " + selection, null);
         int count = cursor.getCount();
-
         if (count>1) {
             return 1;
         }

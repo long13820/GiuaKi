@@ -183,7 +183,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:text="Detail TK"
-                    android:textColor="#F8C5AA"
+                    android:textColor="#257FC5"
                     android:textSize="22sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -225,7 +225,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:text="Product"
-                    android:textColor="#80FC8C"
+                    android:textColor="#257FC5"
                     android:textSize="22sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
