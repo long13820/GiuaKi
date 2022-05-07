@@ -66,13 +66,13 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-//        sanPhamCard.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getContext(), ListBaoCaoActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        sanPhamCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), SanPhamActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void setControl(View view) {

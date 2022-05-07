@@ -58,6 +58,10 @@
             android:exported="false"
             android:theme="@style/Theme.Design.Light.NoActionBar" />
         <activity
+            android:name=".activity.SanPhamActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Design.Light.NoActionBar" />
+        <activity
             android:name=".activity.MenuActivity"
             android:exported="true"
             android:theme="@style/Theme.Design.Light.NoActionBar">

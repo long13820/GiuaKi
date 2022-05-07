@@ -199,6 +199,7 @@
             android:clickable="true"
             android:focusable="true"
             android:foreground="?android:attr/selectableItemBackground"
+            android:onClick="sanPhamCard"
             app:cardBackgroundColor="@android:color/transparent"
             app:cardCornerRadius="30dp"
             app:cardElevation="4dp">

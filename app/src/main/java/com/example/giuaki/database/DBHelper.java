@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.example.giuaki.model.CongNhan;
 import com.example.giuaki.model.DetailTimekeeping;
+import com.example.giuaki.model.SanPham;
 import com.example.giuaki.model.User;
 
 import java.util.ArrayList;
@@ -234,6 +235,47 @@ public class DBHelper extends SQLiteOpenHelper {
         return congNhans;
     }
 
+    public List<SanPham> getAllProducts() {
+        List<SanPham> dsSanPham = new ArrayList<>();
+        String query = "SELECT * FROM SanPham";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        while (cursor.isAfterLast() == false) {
+            SanPham sanPham = new SanPham(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+            cursor.moveToNext();
+            dsSanPham.add(sanPham);
+        }
+        return dsSanPham;
+    }
+    public void themSanPham(SanPham sanPham) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("MaSP", sanPham.getMaSP());
+        values.put("TenSP", sanPham.getTenSP());
+        values.put("DonGia", sanPham.getDonGia());
+        db.insert("SanPham", null, values);
+        db.close();
+    }
+
+    public int updateSanPham(SanPham sanPham) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("MaSP", sanPham.getMaSP());
+        values.put("TenSP", sanPham.getTenSP());
+        values.put("DonGia", sanPham.getDonGia());
+        // updating row
+        return db.update("SanPham", values, "MaSP = ?",
+                new String[]{String.valueOf(sanPham.getMaSP())});
+    }
+
+    public boolean xoaSanPham(String maSP) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete("SanPham", "MaSP = ?", new String[]{maSP}) > 0;
+    }
+
     public void themCongNhan(CongNhan congNhan) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -352,6 +394,8 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return ListTenSP;
     }
+
+
 
     public int updateItemDetailTimekeeping(String SL, String SLErr, String name ) {
         SQLiteDatabase db = this.getWritableDatabase();
