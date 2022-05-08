@@ -92,8 +92,6 @@ public class ChamCongActivity extends AppCompatActivity {
         //ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayTenCN);
         SpinnerCongNhanAdapter adapter = new SpinnerCongNhanAdapter(this, R.layout.custom_pinner, arrayTenCN);
         spinnerCongNhan.setAdapter(adapter);
-
-
     }
 
     private void setControl() {
@@ -112,7 +110,6 @@ public class ChamCongActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
 
@@ -130,8 +127,6 @@ public class ChamCongActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-
     }
 
     ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
@@ -207,17 +202,13 @@ public class ChamCongActivity extends AppCompatActivity {
 
 
             }
-
             super.onChildDraw(c, recyclerView, viewHolder, translationX, dY, actionState, isCurrentlyActive);
-
         }
     };
 
     public void actionGetData() {
         arrayChamCong.clear();
-
         String searchCC= editTextSearchChamCong.getText().toString();
-
         if (spinnerCongNhan.getSelectedItem().toString().equals("Tất cả")) {
 
             Cursor dataChamCong ;
@@ -412,11 +403,9 @@ public class ChamCongActivity extends AppCompatActivity {
                     }
                 }
 
-
                 helper.QueryData("INSERT INTO ChamCong VALUES ('" + maCCMoi + "','" + ngayCCMoi + "', '" + maCNMoi + "')");
                 dialog.dismiss();
                 actionGetData();
-
             }
         });
 

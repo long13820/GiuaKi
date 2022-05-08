@@ -58,6 +58,7 @@ public class ChamCongAdapter extends RecyclerView.Adapter<ChamCongViewHolder> {
                 bundle.putSerializable("chamCong", list.get(position));
                 bundle.putSerializable("congNhan", congNhan);
 
+                intent.putExtra("maCC", String.valueOf(list.get(holder.getAdapterPosition()).MaCC));
                 intent.putExtra("data", bundle);
 
                 context.startActivity(intent);
@@ -69,7 +70,6 @@ public class ChamCongAdapter extends RecyclerView.Adapter<ChamCongViewHolder> {
                 context.dialogUpdate(Integer.parseInt(String.valueOf(list.get(holder.getAdapterPosition()).MaCC)),
                         String.valueOf(list.get(holder.getAdapterPosition()).ngayCC),
                         String.valueOf(list.get(holder.getAdapterPosition()).MaCN));
-
                 return false;
             }
         });
