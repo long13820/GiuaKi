@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -41,13 +42,14 @@ public class SanPhamActivity extends AppCompatActivity {
         adapter.setData(dsSanPham);
         listView.setAdapter(adapter);
         floatingActionButton = findViewById(R.id.floatingInsertActionButton);
-        btnInsert = findViewById(R.id.insert_san_pham);
+  
         floatingActionButton.setOnClickListener(view -> {
             insertSanPham();
         });
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             updateSanPham(dsSanPham.get(i));
         });
+
     }
     void insertSanPham(){
         Dialog dialog = new Dialog(this);
@@ -154,5 +156,8 @@ public class SanPhamActivity extends AppCompatActivity {
         btnback.setOnClickListener(view -> {
             dialog.cancel();
         });
+    }
+    public void btnBackSPClick(View view) {
+        onBackPressed();
     }
 }
