@@ -51,15 +51,17 @@
         <entry key="app/src/main/res/drawable/ic_back_img.xml" value="0.1225" />
         <entry key="app/src/main/res/drawable/ic_round_add.xml" value="0.112" />
         <entry key="app/src/main/res/layout/activity_add_item_timekeeping.xml" value="0.19375" />
-        <entry key="app/src/main/res/layout/activity_cham_cong.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_cham_cong.xml" value="0.12" />
         <entry key="app/src/main/res/layout/activity_change_pass.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_con_nhan.xml" value="0.13496376811594202" />
-        <entry key="app/src/main/res/layout/activity_cong_nhan.xml" value="0.22" />
-        <entry key="app/src/main/res/layout/activity_detail_timekeeping.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/activity_cong_nhan.xml" value="0.10833333333333334" />
+        <entry key="app/src/main/res/layout/activity_detail_timekeeping.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_edit_detail_timekeeping.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/layout/activity_menu.xml" value="0.13496376811594202" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_san_pham.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/layout/activity_timekeeping.xml" value="0.13496376811594202" />
         <entry key="app/src/main/res/layout/add_cong_nhan.xml" value="0.19375" />

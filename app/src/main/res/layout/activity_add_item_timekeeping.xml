@@ -41,6 +41,16 @@
         android:layout_marginRight="20dp"
         android:hint="Mã Sản Phẩm" />
     <EditText
+        android:id="@+id/tv_ma_cc"
+        android:layout_width="match_parent"
+        android:background="@drawable/border_edittext"
+        android:layout_height="wrap_content"
+        android:padding="12sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:hint="Mã chấm công" />
+    <EditText
         android:id="@+id/insert_value"
         android:layout_width="match_parent"
         android:background="@drawable/border_edittext"

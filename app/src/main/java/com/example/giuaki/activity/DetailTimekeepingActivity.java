@@ -92,7 +92,8 @@ public class DetailTimekeepingActivity extends AppCompatActivity {
         });
 
         btnBack.setOnClickListener(view -> {
-            onBackPressed();
+            Intent intent = new Intent(DetailTimekeepingActivity.this, ChamCongActivity.class);
+            startActivity(intent);
         });
     }
 

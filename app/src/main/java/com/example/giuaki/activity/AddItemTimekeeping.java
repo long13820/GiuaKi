@@ -23,7 +23,7 @@ public class AddItemTimekeeping extends AppCompatActivity {
     DBHelper dbHelper;
     private Spinner spinner;
     private TextView tv_TenSP, tv_Loi;
-    private EditText value, valueErr;
+    private EditText value, valueErr,maCC;
     private Button btn_Add, btn_Exit;
     private ArrayList<String> arrTenSP;
 
@@ -40,6 +40,7 @@ public class AddItemTimekeeping extends AppCompatActivity {
         btn_Add = findViewById(R.id.btn_them_item_timekeeping);
         btn_Exit = findViewById(R.id.btn_thoat);
         arrTenSP = dbHelper.getAllSanPham();
+        maCC = findViewById(R.id.tv_ma_cc);
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arrTenSP);
 
@@ -60,9 +61,9 @@ public class AddItemTimekeeping extends AppCompatActivity {
         btn_Add.setOnClickListener(view -> {
             if(!value.getText().toString().equals("") && !valueErr.getText().toString().equals("")){
                 DetailTimekeeping Add = new DetailTimekeeping(spinner.getSelectedItem().toString(), "0", value.getText().toString(), valueErr.getText().toString(), 0);
-                dbHelper.themChiTietChamCong(Add);
+                dbHelper.themChiTietChamCong(Add,maCC.getText().toString().trim());
 
-                Intent intent = new Intent(AddItemTimekeeping.this, DetailTimekeepingActivity.class);
+                Intent intent = new Intent(AddItemTimekeeping.this, ChamCongActivity.class);
                 startActivity(intent);
             }else{
                 tv_Loi.setText("Vui Lòng Xem Lại Số Lượng Sản Phẩm và Phế Phẩm");
