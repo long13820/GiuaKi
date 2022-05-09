@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -11,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.giuaki.R;
@@ -20,6 +20,9 @@ import com.example.giuaki.database.DBHelper;
 import com.example.giuaki.model.SanPham;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 import java.util.List;
 
 public class SanPhamActivity extends AppCompatActivity {
@@ -29,7 +32,9 @@ public class SanPhamActivity extends AppCompatActivity {
     private ListView listView;
     private Button btnInsert;
     FloatingActionButton floatingActionButton;
-
+    String regex = "\\d";
+    Matcher m;
+    boolean validate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +46,14 @@ public class SanPhamActivity extends AppCompatActivity {
         adapter.setData(dsSanPham);
         listView.setAdapter(adapter);
         floatingActionButton = findViewById(R.id.floatingInsertActionButton);
-        btnInsert = findViewById(R.id.insert_san_pham);
+  
         floatingActionButton.setOnClickListener(view -> {
             insertSanPham();
         });
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             updateSanPham(dsSanPham.get(i));
         });
+
     }
     void insertSanPham(){
         Dialog dialog = new Dialog(this);
@@ -58,9 +64,11 @@ public class SanPhamActivity extends AppCompatActivity {
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
 
+        Pattern r = Pattern.compile(regex);
         EditText maSP = (EditText)dialog.findViewById(R.id.insert_id_sp);
         EditText tenSP = (EditText)dialog.findViewById(R.id.insert_ten_sp);
         EditText donGia = (EditText)dialog.findViewById(R.id.insert_don_gia);
+
 
         Button btnThem = (Button)dialog.findViewById(R.id.btn_them_san_pham);
         Button btnback = (Button)dialog.findViewById(R.id.btn_thoat);
@@ -73,9 +81,22 @@ public class SanPhamActivity extends AppCompatActivity {
             }else if(!maSP.getText().toString().trim().equals("")
                     && !tenSP.getText().toString().trim().equals("")
                     && !donGia.getText().toString().trim().equals("")){
+
+                String[] words= donGia.getText().toString().trim().split("");
+                for (int i = 0; i < words.length ; i++) {
+                    char character = words[i].charAt(0);
+                    if ((int) character < 47 || (int) character > 58) {
+                        validate = false;
+
+                        break;
+                    } else validate = true;
+                }
                 if(dbHelper.checkMaCN(maSP.getText().toString().trim()) ){
                     Toast.makeText(this, "Mã sản phẩm đã tồn tại", Toast.LENGTH_SHORT).show();
-                }else{
+                } else if (!validate){
+                    Toast.makeText(this, "Đơn giá phải là số", Toast.LENGTH_SHORT).show();
+                }
+                else{
                     SanPham sanPham = new SanPham(
                             maSP.getText().toString().trim()
                             ,tenSP.getText().toString().trim()
@@ -125,9 +146,22 @@ public class SanPhamActivity extends AppCompatActivity {
             }else if(!maSP.getText().toString().trim().equals("")
                     && !tenSP.getText().toString().trim().equals("")
                     && !donGia.getText().toString().trim().equals("")){
+
+                String[] words= donGia.getText().toString().trim().split("");
+                for (int i = 0; i < words.length ; i++) {
+                    char character = words[i].charAt(0);
+                    if ((int) character < 47 || (int) character > 58) {
+                        validate = false;
+
+                        break;
+                    } else validate = true;
+                }
                 if(!sanPham.getMaSP().equals(maSP.getText().toString().trim())
                         && dbHelper.checkMaCN(maSP.getText().toString().trim()) ){
                     Toast.makeText(this, "Mã sản phẩm đã tồn tại", Toast.LENGTH_SHORT).show();
+                }
+                else if (!validate){
+                    Toast.makeText(this, "Đơn giá phải là số", Toast.LENGTH_SHORT).show();
                 }else{
                     sanPham.setMaSP(maSP.getText().toString().trim());
                     sanPham.setTenSP(tenSP.getText().toString().trim());
@@ -154,5 +188,8 @@ public class SanPhamActivity extends AppCompatActivity {
         btnback.setOnClickListener(view -> {
             dialog.cancel();
         });
+    }
+    public void btnBackSPClick(View view) {
+        onBackPressed();
     }
 }
