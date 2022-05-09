@@ -113,12 +113,12 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO User(FIRSTNAME,LASTNAME, EMAIL, PASSWORD) VALUES ('admin','1','a','1')");
 
 //        //Them du lieu chi tiet phieu nhap
-        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('1',4, 1, 'SP1')");
-        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('2',2, 0, 'SP2')");
-        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('3',3, 1, 'SP3')");
-        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('4',2, 1, 'SP1')");
-        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('5',4, 1, 'SP2')");
-        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('6',3, 3, 'SP3')");
+//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('1',4, 1, 'SP1')");
+//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('2',2, 0, 'SP2')");
+//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('3',3, 1, 'SP3')");
+//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('4',2, 1, 'SP1')");
+//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('5',4, 1, 'SP2')");
+//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('6',3, 3, 'SP3')");
 
         //Them du lieu San Pham
         sqLiteDatabase.execSQL("INSERT INTO SanPham VALUES ('SP1','Gạch ống', 10000)");
