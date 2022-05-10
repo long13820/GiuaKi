@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,6 +32,7 @@ public class SanPhamActivity extends AppCompatActivity {
     private SanPhamAdapter adapter;
     private ListView listView;
     private Button btnInsert;
+    private EditText editTextSearchSanPham;
     FloatingActionButton floatingActionButton;
     String regex = "\\d";
     Matcher m;
@@ -41,6 +43,7 @@ public class SanPhamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_san_pham);
         dbHelper = new DBHelper(this);
         listView = findViewById(R.id.lv_san_pham);
+        editTextSearchSanPham = findViewById(R.id.editTextSearchSanPham);
         dsSanPham = dbHelper.getAllProducts();
         adapter = new SanPhamAdapter(this,R.layout.item_san_pham);
         adapter.setData(dsSanPham);
@@ -53,7 +56,23 @@ public class SanPhamActivity extends AppCompatActivity {
         listView.setOnItemClickListener((adapterView, view, i, l) -> {
             updateSanPham(dsSanPham.get(i));
         });
-
+        editTextSearchSanPham.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int i, KeyEvent keyEvent) {
+                searchSanPham();
+                return false;
+            }
+        });
+    }
+    void searchSanPham() {
+        String searchSP = editTextSearchSanPham.getText().toString().trim();
+        if (searchSP != "") {
+            dsSanPham = dbHelper.searchProducts(searchSP);
+            adapter.setData(dsSanPham);
+        } else {
+            dsSanPham = dbHelper.getAllProducts();
+            adapter.setData(dsSanPham);
+        }
     }
     void insertSanPham(){
         Dialog dialog = new Dialog(this);
@@ -64,7 +83,6 @@ public class SanPhamActivity extends AppCompatActivity {
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
 
-        Pattern r = Pattern.compile(regex);
         EditText maSP = (EditText)dialog.findViewById(R.id.insert_id_sp);
         EditText tenSP = (EditText)dialog.findViewById(R.id.insert_ten_sp);
         EditText donGia = (EditText)dialog.findViewById(R.id.insert_don_gia);

@@ -44,12 +44,32 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <EditText
+        android:id="@+id/editTextSearchSanPham"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_margin="16dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/search_back"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Tìm kiếm"
+        android:inputType="textPersonName"
+        android:paddingStart="20dp"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"/>
+
+
+
     <ListView
         android:id="@+id/lv_san_pham"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
 
-        android:layout_marginTop="40dp"/>
+        android:layout_marginTop="90dp"/>
 
 <!--    <ListView-->
 <!--        android:id="@+id/lv_san_pham"-->

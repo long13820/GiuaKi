@@ -254,6 +254,23 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return dsSanPham;
     }
+
+    public List<SanPham> searchProducts(String seachKey) {
+        List<SanPham> dsSanPham = new ArrayList<>();
+        String query = "SELECT * FROM SanPham WHERE MaSP LIKE '%"+seachKey+"%' OR TenSP LIKE '%"+seachKey+"%'";
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+
+        while (cursor.isAfterLast() == false) {
+            SanPham sanPham = new SanPham(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+            cursor.moveToNext();
+            dsSanPham.add(sanPham);
+        }
+        return dsSanPham;
+    }
+
     public void themSanPham(SanPham sanPham) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
