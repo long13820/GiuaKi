@@ -49,7 +49,7 @@ public class ChamCongAdapter extends RecyclerView.Adapter<ChamCongViewHolder> {
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("ddd", String.valueOf(list.get(holder.getAdapterPosition()).MaCC));
+                Log.d("MaCC", String.valueOf(list.get(holder.getAdapterPosition()).MaCC));
                 Intent intent = new Intent(context, DetailTimekeepingActivity.class);
 
                 Bundle bundle = new Bundle();

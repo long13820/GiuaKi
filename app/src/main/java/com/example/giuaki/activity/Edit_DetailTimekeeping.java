@@ -25,6 +25,7 @@ public class Edit_DetailTimekeeping extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_detail_timekeeping);
+
         dbHelper = new DBHelper(this);
         tv_name = findViewById(R.id.tv_nameproduct);
         tv_price = findViewById(R.id.tv_priceProduct);
@@ -58,6 +59,13 @@ public class Edit_DetailTimekeeping extends AppCompatActivity {
                 }else{
                     tv_hint.setText("Vui Lòng Xem Lại SL Sản Phẩm hoặc SL Sản Phẩm Lỗi");
                 }
+                onBackPressed();
+            }
+        });
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 onBackPressed();
             }
         });

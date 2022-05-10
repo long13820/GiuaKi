@@ -59,7 +59,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-//        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS CongNhan(MaCN VARCHAR(5) PRIMARY KEY,HoCN VARCHAR(100),TenCN VARCHAR(100),PhanXuong VARCHAR(100))");
 //        sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChamCong(MaCC INTEGER PRIMARY KEY,NgayCC VARCHAR(100), MaCN VARCHAR(5))");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS " +
                 "User(ID INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -82,7 +81,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 ", FOREIGN KEY (MaCN)" +
                 " REFERENCES CongNhan (MaCN)" +
                 ")");
-
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS ChiTietChamCong" +
                 "(MaCC" +
                 " REFERENCES ChamCong(MaCC)" +
@@ -93,8 +91,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 " REFERENCES SanPham(MaSP)" +
                 ")");
         sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS SanPham(MaSP VARCHAR(5) PRIMARY KEY, TenSP VARCHAR,DonGia INTEGER)");
-
-
 
         //Them du lieu cong nhan
         sqLiteDatabase.execSQL("INSERT INTO CongNhan VALUES ('CN1','Nguyen','Hung','Bình Chánh')");
@@ -108,23 +104,20 @@ public class DBHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("INSERT INTO ChamCong VALUES (4,'2022-04-17', 'CN2')");
         sqLiteDatabase.execSQL("INSERT INTO ChamCong VALUES (5,'2022-04-17', 'CN3')");
 
-
         //user
         sqLiteDatabase.execSQL("INSERT INTO User(FIRSTNAME,LASTNAME, EMAIL, PASSWORD) VALUES ('admin','1','a','1')");
-
-//        //Them du lieu chi tiet phieu nhap
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('1',4, 1, 'SP1')");
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('2',2, 0, 'SP2')");
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('3',3, 1, 'SP3')");
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('4',2, 1, 'SP1')");
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('5',4, 1, 'SP2')");
-//        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES ('6',3, 3, 'SP3')");
 
         //Them du lieu San Pham
         sqLiteDatabase.execSQL("INSERT INTO SanPham VALUES ('SP1','Gạch ống', 10000)");
         sqLiteDatabase.execSQL("INSERT INTO SanPham VALUES ('SP2','Gạch thẻ', 100000)");
         sqLiteDatabase.execSQL("INSERT INTO SanPham VALUES ('SP3','Sắt tròn', 300000)");
 
+//        //Them du lieu chi tiet phieu nhap
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES (1,4, 1, 'SP1')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES (2,2, 0, 'SP2')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES (3,3, 1, 'SP3')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES (4,2, 1, 'SP1')");
+        sqLiteDatabase.execSQL("INSERT INTO ChiTietChamCong VALUES (5,4, 1, 'SP2')");
     }
 
     @Override
@@ -180,14 +173,11 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-
-
     public void setUpdate(String username, String password) {
         SQLiteDatabase myDB = this.getWritableDatabase();
         myDB.execSQL("INSERT INTO user VALUES ('" + username + "','" + password + "')");
 
     }
-
 
     public Boolean checkUsername(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -207,7 +197,6 @@ public class DBHelper extends SQLiteOpenHelper {
         } else return false;
     }
 
-
     public Boolean insertData(String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -220,8 +209,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
         else return true;
     }
-
-
 
     public List<CongNhan> getAllEmployees() {
         List<CongNhan> congNhans = new ArrayList<>();
@@ -308,11 +295,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void themChiTietChamCong(DetailTimekeeping value) {
+    public void themChiTietChamCong(DetailTimekeeping value, String MaCC) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        // MaCC SoTP SoPP MaSP
-        values.put("MaCC", "1");
+        //MaCC SoTP SoPP MaSP
+        values.put("MaCC", MaCC);
         values.put("SoTP", value.getValue());
         values.put("SoPP", value.getProductErr());
         values.put("MaSP", getMaSP(value.getNameProduct()));
@@ -339,8 +326,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return db.update("congNhan", values, "MaCN = ?",
                 new String[]{String.valueOf(congNhan.getMaCN())});
     }
-
-
 
     public String getMaCN(String taiKhoan) {
         String maCN = "";
@@ -388,7 +373,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public ArrayList<DetailTimekeeping> getAllDetailTimekeeping(String maCC) {
         ArrayList<DetailTimekeeping> detailTimekeepings = new ArrayList<>();
-
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM ChiTietChamCong where maCC=?", new String[]{maCC});
         cursor.moveToFirst();
@@ -415,8 +399,6 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return ListTenSP;
     }
-
-
 
     public int updateItemDetailTimekeeping(String SL, String SLErr, String name ) {
         SQLiteDatabase db = this.getWritableDatabase();

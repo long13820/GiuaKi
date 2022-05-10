@@ -3,6 +3,7 @@ package com.example.giuaki.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -161,4 +162,7 @@ public class CongNhanActivity extends AppCompatActivity {
             dialog.cancel();
         });
     }
+    public void backToMenu(){
+        onBackPressed();
+    };
 }

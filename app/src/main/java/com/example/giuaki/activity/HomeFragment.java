@@ -33,12 +33,9 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         setControl(view);
 
-
         preferenceManager = new PreferenceManager(getContext());
 
         setEvent();
-
-
         return view;
     }
 
